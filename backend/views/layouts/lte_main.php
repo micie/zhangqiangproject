@@ -286,6 +286,14 @@ if($otherMenu == false){
           <ul class="treeview-menu">
             <li class="active"><a href="<?php echo Url::toRoute('announcement/index');?>"><i class="fa fa-circle-o"></i>公告列表</a></li>
             <li class="active"><a href="<?php echo Url::toRoute('question/index');?>"><i class="fa fa-circle-o"></i>问答管理</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('rules/index');?>"><i class="fa fa-circle-o"></i>规则管理</a></li>
+          </ul>
+        </li>    
+  
+        <li class="active treeview">   
+          <a href="#">   <i class="fa fa-table"></i> <span>会员管理</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="<?php echo Url::toRoute('user/index');?>"><i class="fa fa-circle-o"></i>会员列表</a></li>
           </ul>
         </li>    
   

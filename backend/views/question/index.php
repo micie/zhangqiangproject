@@ -166,14 +166,14 @@ $modelLabel = new \backend\models\Question();
                   <textarea class="form-control" id="answer" name="Question[answer]" placeholder="必填" > </textarea>
               </div>
               <div class="clearfix"></div>
+          </div>
+
           <div id="sort_order_div" class="form-group">
               <label for="sort_order" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("sort_order")?></label>
               <div class="col-sm-10">
                   <input type="text" class="form-control" id="sort_order" name="Question[sort_order]" placeholder="必填" />
               </div>
               <div class="clearfix"></div>
-          </div>
-
           </div>
 
 			<?php ActiveForm::end(); ?>          
