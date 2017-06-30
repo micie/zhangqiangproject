@@ -2,10 +2,10 @@
 <?php
 use yii\widgets\LinkPager;
 use yii\bootstrap\ActiveForm;
-use backend\models\Rules;
+use backend\models\User;
 use yii\helpers\Url;
 
-$modelLabel = new \backend\models\Rules();
+$modelLabel = new \backend\models\User();
 ?>
 
 <?php $this->beginBlock('header');  ?>
@@ -19,7 +19,7 @@ $modelLabel = new \backend\models\Rules();
       <div class="box">
       
         <div class="box-header">
-          <h3 class="box-title">问答管理</h3>
+          <h3 class="box-title">会员管理</h3>
           <div class="box-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
                 
@@ -35,7 +35,7 @@ $modelLabel = new \backend\models\Rules();
             <!-- row start search-->
             <div class="row">
             <div class="col-sm-12">
-                <?php ActiveForm::begin(['id' => 'Rules-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('Rules/index')]); ?>     
+                <?php ActiveForm::begin(['id' => 'User-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('User/index')]); ?>     
                 
                   <div class="form-group" style="margin: 5px;">
                       <label><?=$modelLabel->getAttributeLabel('id')?>:</label>
@@ -58,9 +58,14 @@ $modelLabel = new \backend\models\Rules();
             
             <?php 
           echo '<th><input id="data_table_check" type="checkbox"></th>';
-              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('id').'</th>';
-              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('content').'</th>';
-              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >'.$modelLabel->getAttributeLabel('sort_order').'</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >ID</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >手机号</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >姓名</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >上级</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >位置</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >加入时间</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >等级</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >状态</th>';
          
       ?>
   
@@ -72,15 +77,20 @@ $modelLabel = new \backend\models\Rules();
             <?php
             $row = 0;
             foreach ($models as $model) {
-                echo '<tr id="rowid_' . $model->id . '">';
-                echo '  <td><label><input type="checkbox" value="' . $model->id . '"></label></td>';
-                echo '  <td>' . $model->id . '</td>';
-                echo '  <td>' . mb_substr($model->content,0,20,'utf-8') . '...</td>';
-                echo '  <td>' . $model->sort_order . '</td>';
+                echo '<tr id="rowid_' . $model['id'] . '">';
+                echo '  <td><label><input type="checkbox" value="' . $model['id'] . '"></label></td>';
+                echo '  <td>' . $model['id'] . '</td>';
+                echo '  <td>' . $model['uname'] . '</td>';
+                echo '  <td>' . $model['full_name'] . '</td>';
+                echo '  <td>' . $model['top_full_name'] . '</td>';
+                echo '  <td>' . $model['role'] . '</td>';
+                echo '  <td>' . $model['create_date'] . '</td>';
+                echo '  <td>' . $model['level'] . '</td>';
+                echo '  <td>' . $model['status'] . '</td>';
                 echo '  <td class="center">';
-                echo '      <a id="view_btn" onclick="viewAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
-                 echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
-                echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
+                echo '      <a id="view_btn" onclick="viewAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
+                 echo '      <a id="edit_btn" onclick="editAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
+                echo '      <a id="delete_btn" onclick="deleteAction(' . $model['id'] . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                 echo '  </td>';
                 echo '<tr/>';
             }
@@ -139,8 +149,8 @@ $modelLabel = new \backend\models\Rules();
         <h3>Settings</h3>
       </div>
       <div class="modal-body">
-                <?php $form = ActiveForm::begin(["id" => "rules-form", "class"=>"form-horizontal", "action"=>Url::toRoute("rules/save")]); ?>                      
-                 <input type="hidden" class="form-control" id="id" name="Rules[id]" />
+                <?php $form = ActiveForm::begin(["id" => "user-form", "class"=>"form-horizontal", "action"=>Url::toRoute("user/save")]); ?>                      
+                 <input type="hidden" class="form-control" id="id" name="User[id]" />
                  <!-- 
           <div id="id_div" class="form-group">
               <label for="id" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("id")?></label>
@@ -153,7 +163,7 @@ $modelLabel = new \backend\models\Rules();
           <div id="content_div" class="form-group">
               <label for="content" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("content")?></label>
               <div class="col-sm-10">
-                  <textarea class="form-control" id="content" name="Rules[content]" placeholder="必填" > </textarea>
+                  <textarea class="form-control" id="content" name="User[content]" placeholder="必填" > </textarea>
               </div>
               <div class="clearfix"></div>
           </div>
@@ -161,7 +171,7 @@ $modelLabel = new \backend\models\Rules();
           <div id="sort_order_div" class="form-group">
               <label for="sort_order" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("sort_order")?></label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="sort_order" name="Rules[sort_order]" placeholder="必填" />
+                  <input type="text" class="form-control" id="sort_order" name="User[sort_order]" placeholder="必填" />
               </div>
               <div class="clearfix"></div>
           </div>
@@ -217,7 +227,7 @@ function initModel(id, type, fun){
   
   $.ajax({
        type: "GET",
-       url: "<?=Url::toRoute('rules/view')?>",
+       url: "<?=Url::toRoute('user/view')?>",
        data: {"id":id},
        cache: false,
        dataType:"json",
@@ -255,7 +265,7 @@ function deleteAction(id){
     admin_tool.confirm('请确认是否删除', function(){
         $.ajax({
            type: "GET",
-           url: "<?=Url::toRoute('rules/delete')?>",
+           url: "<?=Url::toRoute('user/delete')?>",
            data: {"ids":ids},
            cache: false,
            dataType:"json",
@@ -298,7 +308,7 @@ function getSelectedIdValues(formId)
 
 $('#edit_dialog_ok').click(function (e) {
     e.preventDefault();
-  $('#rules-form').submit();
+  $('#user-form').submit();
 });
 
 $('#create_btn').click(function (e) {
@@ -311,10 +321,10 @@ $('#delete_btn').click(function (e) {
     deleteAction('');
 });
 
-$('#rules-form').bind('submit', function(e) {
+$('#user-form').bind('submit', function(e) {
   e.preventDefault();
   var id = $("#id").val();
-  var action = id == "" ? "<?=Url::toRoute('rules/create')?>" : "<?=Url::toRoute('rules/update')?>";
+  var action = id == "" ? "<?=Url::toRoute('user/create')?>" : "<?=Url::toRoute('user/update')?>";
     $(this).ajaxSubmit({
       type: "post",
       dataType:"json",

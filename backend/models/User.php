@@ -17,26 +17,5 @@ class User extends BaseModel
         return 'user';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['create_date', 'update_date'], 'safe'],
-            [['create_user','update_user','status'], 'integer']
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'status' => '状态',
-        ];
-    }
  
 }

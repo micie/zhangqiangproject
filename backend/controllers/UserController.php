@@ -4,13 +4,12 @@ namespace backend\controllers;
 
 use Yii;
 use yii\data\Pagination;
-use backend\models\Rules;
+use backend\models\User;
+use backend\models\UserLevelHis;
+use backend\models\UserTier;
 use yii\web\NotFoundHttpException;
 
-/**
- * AdminUserController implements the CRUD actions for AdminUser model.
- */
-class RulesController extends Base2Controller
+class UserController extends Base2Controller
 {
 	public $layout = "lte_main";
 
@@ -20,38 +19,43 @@ class RulesController extends Base2Controller
      */
     public function actionIndex()
     {
-        $query = Rules::find();
          $querys = Yii::$app->request->get('query');
-        if(count($querys) > 0){
-            $condition = "";
-            $parame = array();
-            foreach($querys as $key=>$value){
-                $value = trim($value);
-                if(empty($value) == false){
-                    $parame[":{$key}"]=$value;
-                    if(empty($condition) == true){
-                        $condition = " {$key}=:{$key} ";
-                    }
-                    else{
-                        $condition = $condition . " AND {$key}=:{$key} ";
-                    }
-                }
-            }
-            if(count($parame) > 0){
-                $query = $query->where($condition, $parame);
-            }
-        }
+        // $query = Rules::find();
+        // if(count($querys) > 0){
+        //     $condition = "";
+        //     $parame = array();
+        //     foreach($querys as $key=>$value){
+        //         $value = trim($value);
+        //         if(empty($value) == false){
+        //             $parame[":{$key}"]=$value;
+        //             if(empty($condition) == true){
+        //                 $condition = " {$key}=:{$key} ";
+        //             }
+        //             else{
+        //                 $condition = $condition . " AND {$key}=:{$key} ";
+        //             }
+        //         }
+        //     }
+        //     if(count($parame) > 0){
+        //         $query = $query->where($condition, $parame);
+        //     }
+        // }
         //$models = $query->orderBy('display_order')
+        $sql = "select a.*,b.role,b.top_user_id,c.full_name as top_full_name  from ".User::tableName()." a left join  ".UserTier::tableName()." b on a.id=b.user_id left join  ".User::tableName()." c on b.top_user_id=c.id order by a.create_date desc ";
+        $query = User::findBysql($sql);
+
         $pagination = new Pagination([
             'totalCount' =>$query->count(), 
-            'pageSize' => '10', 
+            'pageSize' => '30', 
             'pageParam'=>'page', 
             'pageSizeParam'=>'per-page']
         );
         $models = $query
         ->offset($pagination->offset)
         ->limit($pagination->limit)
+        ->asArray()
         ->all();
+
         return $this->render('index', [
             'models'=>$models,
             'pages'=>$pagination,
