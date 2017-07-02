@@ -71,8 +71,11 @@ class UserController extends Base2Controller
     public function actionView($id)
     {
         //$id = Yii::$app->request->post('id');
-        $model = $this->findModel($id);
-        echo json_encode($model->getAttributes());
+        // $model = $this->findModel($id);
+        // echo json_encode($model->getAttributes());
+        $sql = "select a.*,b.role,b.top_user_id,c.full_name as top_full_name  from ".User::tableName()." a left join  ".UserTier::tableName()." b on a.id=b.user_id left join  ".User::tableName()." c on b.top_user_id=c.id where a.id=:id ";
+        $query = User::findBysql($sql,[':id'=>$id])->asArray()->one();
+        echo json_encode($query);
 
     }
 
@@ -158,7 +161,7 @@ class UserController extends Base2Controller
         if (($model = Rules::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('未找到相关信息');
         }
     }
 }

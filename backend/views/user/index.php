@@ -4,6 +4,7 @@ use yii\widgets\LinkPager;
 use yii\bootstrap\ActiveForm;
 use backend\models\User;
 use yii\helpers\Url;
+use backend\services\CommonService;
 
 $modelLabel = new \backend\models\User();
 ?>
@@ -59,6 +60,7 @@ $modelLabel = new \backend\models\User();
             <?php 
           echo '<th><input id="data_table_check" type="checkbox"></th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >ID</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >用户名</th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >手机号</th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >姓名</th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >上级</th>';
@@ -81,12 +83,13 @@ $modelLabel = new \backend\models\User();
                 echo '  <td><label><input type="checkbox" value="' . $model['id'] . '"></label></td>';
                 echo '  <td>' . $model['id'] . '</td>';
                 echo '  <td>' . $model['uname'] . '</td>';
+                echo '  <td>' . $model['phone'] . '</td>';
                 echo '  <td>' . $model['full_name'] . '</td>';
                 echo '  <td>' . $model['top_full_name'] . '</td>';
-                echo '  <td>' . $model['role'] . '</td>';
+                echo '  <td>' . CommonService::getRoleName($model['role']) . '</td>';
                 echo '  <td>' . $model['create_date'] . '</td>';
                 echo '  <td>' . $model['level'] . '</td>';
-                echo '  <td>' . $model['status'] . '</td>';
+                echo '  <td>' . CommonService::getStatusName($model['status']) . '</td>';
                 echo '  <td class="center">';
                 echo '      <a id="view_btn" onclick="viewAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
                  echo '      <a id="edit_btn" onclick="editAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
@@ -160,21 +163,57 @@ $modelLabel = new \backend\models\User();
               <div class="clearfix"></div>
           </div>
              -->
-          <div id="content_div" class="form-group">
-              <label for="content" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("content")?></label>
+          <div id="uname_div" class="form-group">
+              <label for="uname" class="col-sm-2 control-label">用户名</label>
               <div class="col-sm-10">
-                  <textarea class="form-control" id="content" name="User[content]" placeholder="必填" > </textarea>
+                  <input type="text" class="form-control" id="uname" name="User[uname]" placeholder="必填" />
               </div>
               <div class="clearfix"></div>
           </div>
+          <div id="full_name_div" class="form-group">
+              <label for="full_name" class="col-sm-2 control-label">姓名</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="full_name" name="User[full_name]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+          <div id="phone_div" class="form-group">
+              <label for="phone" class="col-sm-2 control-label">电话</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="phone" name="User[phone]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+          <div id="status_div" class="form-group">
+              <label for="status" class="col-sm-2 control-label">状态</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="status" name="User[status]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+          <div id="create_date_div" class="form-group">
+              <label for="create_date" class="col-sm-2 control-label">加入时间</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="create_date" name="User[create_date]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+          <div id="level_div" class="form-group">
+              <label for="level" class="col-sm-2 control-label">等级</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="level" name="User[level]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+          <div id="sex_div" class="form-group">
+              <label for="sex" class="col-sm-2 control-label">性别</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="sex" name="User[sex]" placeholder="必填" />
+              </div>
+              <div class="clearfix"></div>
+          </div>
+        
 
-          <div id="sort_order_div" class="form-group">
-              <label for="sort_order" class="col-sm-2 control-label"><?php echo $modelLabel->getAttributeLabel("sort_order")?></label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="sort_order" name="User[sort_order]" placeholder="必填" />
-              </div>
-              <div class="clearfix"></div>
-          </div>
 
       <?php ActiveForm::end(); ?>          
                 </div>
@@ -189,7 +228,7 @@ $modelLabel = new \backend\models\User();
 <!-- <body></body>后代码块 -->
  <script>
  function searchAction(){
-    $('#Question-search-form').submit();
+    $('#User-search-form').submit();
   }
  function viewAction(id){
     initModel(id, 'view', 'fun');
@@ -197,26 +236,45 @@ $modelLabel = new \backend\models\User();
 
  function initEditSystemModule(data, type){
   if(type == 'create'){
-    $("#id").val('');
-    $("#content").val('');
-    $("#answer").val('');
-    
+    $("#id").val('');    
+    $("#uname").val('');    
+    $("#full_name").val('');    
+    $("#phone").val('');    
+    $("#status").val('');    
+    $("#level").val('');    
+    $("#top_user_id").val('');    
+    $("#sex").val('');    
   }
   else{
     $("#id").val(data.id);
-      $("#content").val(data.content);
-      $("#sort_order").val(data.sort_order);
-      }
+      $("#uname").val(data.uname);
+      $("#full_name").val(data.full_name);
+      $("#phone").val(data.phone);
+      $("#status").val(data.status);
+      $("#level").val(data.level);
+      $("#top_user_id").val(data.top_user_id);
+      $("#sex").val(data.sex);
+  }
   if(type == "view"){
       $("#id").attr({readonly:true,disabled:true});
-      $("#content").attr({readonly:true,disabled:true});
-      $("#sort_order").attr({readonly:true,disabled:true});
+      $("#uname").attr({readonly:true,disabled:true});
+      $("#full_name").attr({readonly:true,disabled:true});
+      $("#phone").attr({readonly:true,disabled:true});
+      $("#status").attr({readonly:true,disabled:true});
+      $("#level").attr({readonly:true,disabled:true});
+      $("#top_user_id").attr({readonly:true,disabled:true});
+      $("#sex").attr({readonly:true,disabled:true});
     $('#edit_dialog_ok').addClass('hidden');
   }
   else{
+      $("#uname").attr({readonly:true,disabled:true});
       $("#id").attr({readonly:false,disabled:false});
-      $("#content").attr({readonly:false,disabled:false});
-      $("#sort_order").attr({readonly:false,disabled:false});
+      $("#full_name").attr({readonly:false,disabled:false});
+      $("#phone").attr({readonly:false,disabled:false});
+      $("#status").attr({readonly:false,disabled:false});
+      $("#level").attr({readonly:false,disabled:false});
+      $("#top_user_id").attr({readonly:false,disabled:false});
+      $("#sex").attr({readonly:false,disabled:false});
       
     $('#edit_dialog_ok').removeClass('hidden');
   }
