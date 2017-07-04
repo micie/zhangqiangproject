@@ -187,14 +187,16 @@ $modelLabel = new \backend\models\User();
           <div id="status_div" class="form-group">
               <label for="status" class="col-sm-2 control-label">状态</label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="status" name="User[status]" placeholder="必填" />
+                  <input type="radio" id="status0" name="User[status]" value="0" />正常 
+                  <input type="radio" id="status1" name="User[status]" value="1"  />禁用 
+                  <input type="radio" id="status2" name="User[status]" value="2"  />被替代 
               </div>
               <div class="clearfix"></div>
           </div>
           <div id="create_date_div" class="form-group">
               <label for="create_date" class="col-sm-2 control-label">加入时间</label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="create_date" name="User[create_date]" placeholder="必填" />
+                  <input type="text" class="form-control" id="create_date" name="User[create_date]"  />
               </div>
               <div class="clearfix"></div>
           </div>
