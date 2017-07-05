@@ -93,7 +93,6 @@ $modelLabel = new \backend\models\User();
                 echo '  <td class="center">';
                 echo '      <a id="view_btn" onclick="viewAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
                  echo '      <a id="edit_btn" onclick="editAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
-                echo '      <a id="delete_btn" onclick="deleteAction(' . $model['id'] . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                 echo '  </td>';
                 echo '<tr/>';
             }
@@ -187,8 +186,8 @@ $modelLabel = new \backend\models\User();
           <div id="status_div" class="form-group">
               <label for="status" class="col-sm-2 control-label">状态</label>
               <div class="col-sm-10">
-                  <input type="radio" id="status0" name="User[status]" value="0" />正常 
-                  <input type="radio" id="status1" name="User[status]" value="1"  />禁用 
+                  <input type="radio" id="status0" name="User[status]" value="0" />正常&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="radio" id="status1" name="User[status]" value="1"  />禁用&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="radio" id="status2" name="User[status]" value="2"  />被替代 
               </div>
               <div class="clearfix"></div>
@@ -196,21 +195,22 @@ $modelLabel = new \backend\models\User();
           <div id="create_date_div" class="form-group">
               <label for="create_date" class="col-sm-2 control-label">加入时间</label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="create_date" name="User[create_date]"  />
+                  <input type="text" class="form-control" id="create_date" name="User[create_date]" placeholder="格式：2017-01-01" />
               </div>
               <div class="clearfix"></div>
           </div>
           <div id="level_div" class="form-group">
               <label for="level" class="col-sm-2 control-label">等级</label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="level" name="User[level]" placeholder="必填" />
+                  <input type="number" class="form-control" id="level" name="User[level]" placeholder="1-10级" min="1" max="10" />
               </div>
               <div class="clearfix"></div>
           </div>
           <div id="sex_div" class="form-group">
               <label for="sex" class="col-sm-2 control-label">性别</label>
               <div class="col-sm-10">
-                  <input type="text" class="form-control" id="sex" name="User[sex]" placeholder="必填" />
+                  <input type="radio" id="sex0" name="User[status]" value="0" />男&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="radio" id="sex1" name="User[status]" value="1"  />女
               </div>
               <div class="clearfix"></div>
           </div>
@@ -242,8 +242,7 @@ $modelLabel = new \backend\models\User();
     $("#uname").val('');    
     $("#full_name").val('');    
     $("#phone").val('');    
-    $("#status").val('');    
-    $("#level").val('');    
+    $("#level").val('1');    
     $("#top_user_id").val('');    
     $("#sex").val('');    
   }
@@ -252,20 +251,34 @@ $modelLabel = new \backend\models\User();
       $("#uname").val(data.uname);
       $("#full_name").val(data.full_name);
       $("#phone").val(data.phone);
-      $("#status").val(data.status);
       $("#level").val(data.level);
-      $("#top_user_id").val(data.top_user_id);
-      $("#sex").val(data.sex);
+      if(data.status == 0){
+        $("#status0").attr('checked','true');
+      }
+      if(data.status == 1){
+        $("#status1").attr('checked','true');
+      }
+      if(data.status == 2){
+        $("#status2").attr('checked','true');
+      }
+      if(data.sex == 0){
+        $("#sex0").attr('checked','true');
+      }
+      if(data.sex == 1){
+        $("#sex1").attr('checked','true');
+      }
   }
   if(type == "view"){
       $("#id").attr({readonly:true,disabled:true});
       $("#uname").attr({readonly:true,disabled:true});
       $("#full_name").attr({readonly:true,disabled:true});
       $("#phone").attr({readonly:true,disabled:true});
-      $("#status").attr({readonly:true,disabled:true});
+      $("#status0").attr({readonly:true,disabled:true});
+      $("#status1").attr({readonly:true,disabled:true});
+      $("#status2").attr({readonly:true,disabled:true});
       $("#level").attr({readonly:true,disabled:true});
-      $("#top_user_id").attr({readonly:true,disabled:true});
-      $("#sex").attr({readonly:true,disabled:true});
+      $("#sex0").attr({readonly:true,disabled:true});
+      $("#sex1").attr({readonly:true,disabled:true});
     $('#edit_dialog_ok').addClass('hidden');
   }
   else{
@@ -273,10 +286,12 @@ $modelLabel = new \backend\models\User();
       $("#id").attr({readonly:false,disabled:false});
       $("#full_name").attr({readonly:false,disabled:false});
       $("#phone").attr({readonly:false,disabled:false});
-      $("#status").attr({readonly:false,disabled:false});
+      $("#status0").attr({readonly:false,disabled:false});
+      $("#status1").attr({readonly:false,disabled:false});
+      $("#status2").attr({readonly:false,disabled:false});
       $("#level").attr({readonly:false,disabled:false});
-      $("#top_user_id").attr({readonly:false,disabled:false});
-      $("#sex").attr({readonly:false,disabled:false});
+      $("#sex0").attr({readonly:false,disabled:false});
+      $("#sex1").attr({readonly:false,disabled:false});
       
     $('#edit_dialog_ok').removeClass('hidden');
   }
