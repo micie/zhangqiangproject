@@ -5,11 +5,11 @@ use yii\helpers\Url;
 
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?=Url::toRoute('site/login')?>"><b>Yii</b>Boot</a>
+    <a href="<?=Url::toRoute('site/login')?>">管理员登录</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">登录到后台管理系统</p>
 	<?php $form = ActiveForm::begin(['id' => 'login-form', 'action'=>Url::toRoute('site/login')]); ?>
     <!-- <form action="../../index2.html" method="post">   -->
       <div class="form-group has-feedback">
