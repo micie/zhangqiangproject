@@ -10,8 +10,6 @@ $this->title = '欢迎使用';
         <h1>欢迎使用!</h1>
 
         <p class="lead">欢迎使用YiiBoot通用后台</p>
-
-        <p><a class="btn btn-lg btn-success" target="_blank" href="http://git.oschina.net/penngo/chadmin">开源地址</a></p>
     </div>
 
     <div class="body-content">

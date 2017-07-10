@@ -294,6 +294,7 @@ if($otherMenu == false){
           <a href="#">   <i class="fa fa-table"></i> <span>会员管理</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
           <ul class="treeview-menu">
             <li class="active"><a href="<?php echo Url::toRoute('user/index');?>"><i class="fa fa-circle-o"></i>会员列表</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user-level/index');?>"><i class="fa fa-circle-o"></i>申请管理</a></li>
           </ul>
         </li>    
   
@@ -335,7 +336,7 @@ if($otherMenu == false){
     <div class="pull-right hidden-xs">
       <b>Version</b> <?=Yii::$app->params['appVersion']?>
     </div>
-    <strong>Copyright &copy; 2017-<?=date('Y')?> <a href="<?=Yii::$app->params['homePage']?>"><?=Yii::$app->params['appName']?></a>.</strong> All rights
+    <strong>Copyright &copy; 2016-<?=date('Y')?> <a href="<?=Yii::$app->params['homePage']?>"><?=Yii::$app->params['appName']?></a>.</strong> All rights
     reserved.
   </footer>
 

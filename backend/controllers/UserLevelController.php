@@ -9,7 +9,7 @@ use backend\models\UserLevelHis;
 use backend\models\UserTier;
 use yii\web\NotFoundHttpException;
 
-class UserController extends Base2Controller
+class UserLevelController extends Base2Controller
 {
 	public $layout = "lte_main";
 
@@ -28,7 +28,7 @@ class UserController extends Base2Controller
                 $value = trim($value);
                 if(empty($value) == false){
                     if($key == 'keyword'){
-                        $where .= " and (a.uname like '%".$value."%' or a.phone like '%".$value."%' or a.full_name like '%".$value."%' )";
+                        $where .= " and (b.full_name like '%".$value."%' or c.full_name like '%".$value."%' )";
                     }
                 }
             }
@@ -36,7 +36,7 @@ class UserController extends Base2Controller
                 $query = $query->where($condition, $parame);
             }
         }
-        $sql = "select a.*,b.role,b.top_user_id,c.full_name as top_full_name  from ".User::tableName()." a left join  ".UserTier::tableName()." b on a.id=b.user_id left join  ".User::tableName()." c on b.top_user_id=c.id ".$where." order by a.create_date desc ";
+        $sql = "select a.*,b.full_name as ask_full_name,c.full_name as approval_full_name  from ".UserLevelHis::tableName()." a left join  ".User::tableName()." b on a.user_id=b.id left join  ".User::tableName()." c on a.approval_user_id=c.id ".$where." order by a.status asc,a.add_time desc ";
         $query = User::findBysql($sql);
 
         $pagination = new Pagination([
@@ -68,7 +68,7 @@ class UserController extends Base2Controller
         //$id = Yii::$app->request->post('id');
         // $model = $this->findModel($id);
         // echo json_encode($model->getAttributes());
-        $sql = "select a.*,b.role,b.top_user_id,c.full_name as top_full_name  from ".User::tableName()." a left join  ".UserTier::tableName()." b on a.id=b.user_id left join  ".User::tableName()." c on b.top_user_id=c.id where a.id=:id ";
+        $sql = "select a.*,b.full_name as ask_full_name,c.full_name as top_full_name  from ".UserLevelHis::tableName()." a left join  ".User::tableName()." b on a.user_id=b.id left join  ".User::tableName()." c on a.approval_user_id=c.id where a.id=:id ";
         $query = User::findBysql($sql,[':id'=>$id])->asArray()->one();
         echo json_encode($query);
 
@@ -93,24 +93,17 @@ class UserController extends Base2Controller
     public function actionUpdate()
     {
         $id = Yii::$app->request->post('id');
-        $phone = Yii::$app->request->post('phone');
-        $full_name = Yii::$app->request->post('full_name');
-        $sex = Yii::$app->request->post('sex');
-        $level = Yii::$app->request->post('level');
+        $status = Yii::$app->request->post('status');
+        $approval_remark = Yii::$app->request->post('approval_remark');
         $modelUser = User::findOne($id);
-        if(isset($phone)){
-            $modelUser->phone = $phone;
+        if(isset($status)){
+            $modelUser->status = $status;
         }
-        if(isset($full_name)){
-            $modelUser->full_name = $full_name;
+        if(isset($approval_remark)){
+            $modelUser->approval_remark = $approval_remark;
         }
-        if(isset($sex)){
-            $modelUser->sex = $sex;
-        }
-        if(isset($level)){
-            $modelUser->level = $level;
-        }
-        $modelUser->update_date = date('Y-m-d H:i:s',time());
+
+        $modelUser->approval_time = date('Y-m-d H:i:s',time());
         if($modelUser->save()){
             $msg = array('errno'=>0, 'msg'=>'保存成功');
             echo json_encode($msg);

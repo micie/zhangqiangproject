@@ -6,7 +6,7 @@ use backend\models\User;
 use yii\helpers\Url;
 use backend\services\CommonService;
 
-$modelLabel = new \backend\models\User();
+$modelLabel = new \backend\models\UserLevelHis();
 ?>
 
 <?php $this->beginBlock('header');  ?>
@@ -20,7 +20,7 @@ $modelLabel = new \backend\models\User();
       <div class="box">
       
         <div class="box-header">
-          <h3 class="box-title">会员管理</h3>
+          <h3 class="box-title">申请管理</h3>
           <div class="box-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
                 
@@ -36,14 +36,14 @@ $modelLabel = new \backend\models\User();
             <!-- row start search-->
             <div class="row">
             <div class="col-sm-12">
-                <?php ActiveForm::begin(['id' => 'User-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('user/index')]); ?>     
+                <?php ActiveForm::begin(['id' => 'User-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('user-level/index')]); ?>     
                 
                   <div class="form-group" style="margin: 5px;">
                       <label>搜索:</label>
-                      <input type="text" class="form-control" id="query[keyword]" name="query[keyword]"  value="<?=isset($query["keyword"]) ? $query["keyword"] : "" ?>" placeholder="搜索手机号或者姓名">
+                      <input type="text" class="form-control" id="query[keyword]" name="query[keyword]"  value="<?=isset($query["keyword"]) ? $query["keyword"] : "" ?>" placeholder="搜索申请人或者审核人">
                   </div>
               <div class="form-group">
-                <a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>搜索</a> | <button id="create_btn" type="button" class="btn btn-sm btn-primary">添加</button>
+                <a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>搜索</a>
               </div>
                <?php ActiveForm::end(); ?> 
             </div>
@@ -60,18 +60,17 @@ $modelLabel = new \backend\models\User();
             <?php 
           echo '<th><input id="data_table_check" type="checkbox"></th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >ID</th>';
-              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >用户名</th>';
-              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >手机号</th>';
-              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >姓名</th>';
-              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >上级</th>';
-              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >位置</th>';
-              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >加入时间</th>';
-              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >等级</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >申请人</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >申请时间</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >审核人</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >审核时间</th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >状态</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >原等级</th>';
+              echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >新等级</th>';
          
       ?>
   
-            <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >操作</th>
+            <!-- <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >操作</th> -->
             </tr>
             </thead>
             <tbody>
@@ -82,18 +81,17 @@ $modelLabel = new \backend\models\User();
                 echo '<tr id="rowid_' . $model['id'] . '">';
                 echo '  <td><label><input type="checkbox" value="' . $model['id'] . '"></label></td>';
                 echo '  <td>' . $model['id'] . '</td>';
-                echo '  <td>' . $model['uname'] . '</td>';
-                echo '  <td>' . $model['phone'] . '</td>';
-                echo '  <td>' . $model['full_name'] . '</td>';
-                echo '  <td>' . $model['top_full_name'] . '</td>';
-                echo '  <td>' . CommonService::getRoleName($model['role']) . '</td>';
-                echo '  <td>' . $model['create_date'] . '</td>';
-                echo '  <td>' . $model['level'] . '</td>';
-                echo '  <td>' . CommonService::getStatusName($model['status']) . '</td>';
-                echo '  <td class="center">';
-                echo '      <a id="view_btn" onclick="viewAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
-                 echo '      <a id="edit_btn" onclick="editAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
-                echo '  </td>';
+                echo '  <td>' . $model['ask_full_name'] . '</td>';
+                echo '  <td>' . $model['add_time'] . '</td>';
+                echo '  <td>' . $model['approval_full_name'] . '</td>';
+                echo '  <td>' . $model['approval_time'] . '</td>';
+                echo '  <td>' . CommonService::getLevelStatusName($model['status']) . '</td>';
+                echo '  <td>' . $model['old_level'] . '</td>';
+                echo '  <td>' . $model['new_level'] . '</td>';
+                //echo '  <td class="center">';
+                //echo '      <a id="view_btn" onclick="viewAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
+                 //echo '      <a id="edit_btn" onclick="editAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
+                //echo '  </td>';
                 echo '<tr/>';
             }
             

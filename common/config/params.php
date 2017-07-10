@@ -5,5 +5,5 @@ return [
     'user.passwordResetTokenExpire' => 3600,
     'appVersion' => '1.0.0',
     'appName' => 'YiiBoot',
-    'homePage' => 'http://git.oschina.net/penngo/chadmin'
+    'homePage' => ''
 ];
