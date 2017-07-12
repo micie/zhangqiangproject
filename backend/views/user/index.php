@@ -29,6 +29,16 @@ $modelLabel = new \backend\models\User();
             </div>
           </div>
         </div>
+        <div class="box-header">
+        <?php
+          if($top_user_id > 0 ){
+            foreach ($path_show as  $value) {
+              echo '<h3 class="box-title"><a class="btn btn-primary btn-sm" href="'.Url::toRoute(['user/index','top_user_id'=>$value['user_id']]).'"> '.$value['full_name'].'</a></h3> >> ';
+            }
+          }
+        ?>
+          
+        </div>
         <!-- /.box-header -->
         
         <div class="box-body">
@@ -58,7 +68,7 @@ $modelLabel = new \backend\models\User();
             <tr role="row">
             
             <?php 
-          echo '<th><input id="data_table_check" type="checkbox"></th>';
+          //echo '<th><input id="data_table_check" type="checkbox"></th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >ID</th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >用户名</th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >手机号</th>';
@@ -80,7 +90,7 @@ $modelLabel = new \backend\models\User();
             $row = 0;
             foreach ($models as $model) {
                 echo '<tr id="rowid_' . $model['id'] . '">';
-                echo '  <td><label><input type="checkbox" value="' . $model['id'] . '"></label></td>';
+                //echo '  <td><label><input type="checkbox" value="' . $model['id'] . '"></label></td>';
                 echo '  <td>' . $model['id'] . '</td>';
                 echo '  <td>' . $model['uname'] . '</td>';
                 echo '  <td>' . $model['phone'] . '</td>';
@@ -93,6 +103,7 @@ $modelLabel = new \backend\models\User();
                 echo '  <td class="center">';
                 echo '      <a id="view_btn" onclick="viewAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
                  echo '      <a id="edit_btn" onclick="editAction(' . $model['id'] . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
+                 echo '      <a   class="btn btn-primary btn-sm" href="'.Url::toRoute(['user/index','top_user_id'=>$model['id']]).'"> <i class="glyphicon glyphicon-edit icon-white"></i>下级</a>';
                 echo '  </td>';
                 echo '<tr/>';
             }

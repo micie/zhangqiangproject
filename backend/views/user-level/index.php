@@ -58,7 +58,7 @@ $modelLabel = new \backend\models\UserLevelHis();
             <tr role="row">
             
             <?php 
-          echo '<th><input id="data_table_check" type="checkbox"></th>';
+          //echo '<th><input id="data_table_check" type="checkbox"></th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >ID</th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >申请人</th>';
               echo '<th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >申请时间</th>';
@@ -79,7 +79,7 @@ $modelLabel = new \backend\models\UserLevelHis();
             $row = 0;
             foreach ($models as $model) {
                 echo '<tr id="rowid_' . $model['id'] . '">';
-                echo '  <td><label><input type="checkbox" value="' . $model['id'] . '"></label></td>';
+                //echo '  <td><label><input type="checkbox" value="' . $model['id'] . '"></label></td>';
                 echo '  <td>' . $model['id'] . '</td>';
                 echo '  <td>' . $model['ask_full_name'] . '</td>';
                 echo '  <td>' . $model['add_time'] . '</td>';

@@ -8,6 +8,7 @@ use backend\models\User;
 use backend\models\UserLevelHis;
 use backend\models\UserTier;
 use yii\web\NotFoundHttpException;
+use backend\services\CommonService;
 
 class UserController extends Base2Controller
 {
@@ -36,6 +37,12 @@ class UserController extends Base2Controller
                 $query = $query->where($condition, $parame);
             }
         }
+        $top_user_id = Yii::$app->request->get('top_user_id');
+        if($top_user_id && is_numeric($top_user_id)){
+            $where .= " and b.top_user_id =".$top_user_id;
+        }else{
+            $top_user_id = 0;
+        }
         $sql = "select a.*,b.role,b.top_user_id,c.full_name as top_full_name  from ".User::tableName()." a left join  ".UserTier::tableName()." b on a.id=b.user_id left join  ".User::tableName()." c on b.top_user_id=c.id ".$where." order by a.create_date desc ";
         $query = User::findBysql($sql);
 
@@ -50,11 +57,15 @@ class UserController extends Base2Controller
         ->limit($pagination->limit)
         ->asArray()
         ->all();
-
+        $path = CommonService::getUserPath($top_user_id);
+        $path_show = CommonService::getUserPathShow($path);
+        //print_r($path_show);die;
         return $this->render('index', [
             'models'=>$models,
             'pages'=>$pagination,
             'query'=>$querys,
+            'top_user_id'=>$top_user_id,
+            'path_show'=>$path_show,
         ]);
     }
 
