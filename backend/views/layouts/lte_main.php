@@ -170,9 +170,9 @@ if($otherMenu == false){
     <!-- Logo -->
     <a href="<?=Url::toRoute('site/index')?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>Y</b>BT</span>
+      <span class="logo-mini"><b>X</b>BT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Y</b>BOOT管理系统</span>
+      <span class="logo-lg"><b>X</b>BOOT管理系统</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -198,7 +198,7 @@ if($otherMenu == false){
               <!-- Menu Body -->
               <li class="user-body">
               	<ul class="menu">
-            		<li><a href="<?=Url::toRoute('site/psw')?>"><i class="fa fa-cog"></i> 修改密码</a></li>
+            		<!-- <li><a href="<?=Url::toRoute('site/psw')?>"><i class="fa fa-cog"></i> 修改密码</a></li> -->
                 	<li><a href="<?=Url::toRoute('site/logout')?>" data-method="post"><i class="fa fa-sign-out"></i> 退出</a></li>
             	</ul>
             
@@ -253,33 +253,33 @@ if($otherMenu == false){
         </li>
         <?php 
         
-			foreach($system_menus as $menu){
-			    $funcList = $menu['funcList'];
-			    $isMenuActive = '';
-			    $isTreeView = count($funcList) > 0 ? "treeview" : "";
-			    $menuHtml = '<li class="#isMenuActive#'. $isTreeView .'">'; // active 
-			    $menuHtml .= '   <a href="#">';
-			    $menuHtml .= '   <i class="fa fa-table"></i> <span>'. $menu['label'] .'</span>';
-			    $menuHtml .= '   <span class="pull-right-container">';
-			    $menuHtml .= '       <i class="fa fa-angle-left pull-right"></i>';
-			    $menuHtml .= '   </span>';
-			    $menuHtml .= '   </a>';
-			   // echo '   <ul class="treeview-menu">';
-			   if($isTreeView != ""){
-			       $menuHtml .= '<ul class="treeview-menu">';
-			       foreach($funcList as $fun){
-			           $isActive = $fun['url'] == $funInfo['entry_url'] ? 'class="active"' : ''; //'. $isActive .'
-			           $menuHtml .= '<li '. $isActive .'><a href="'.Url::to([$fun['url']]).'"><i class="fa fa-circle-o"></i>'. $fun['label'] .'</a></li>';
-			           if(empty($isMenuActive) == true && $isActive != ""){
-			               $isMenuActive = 'active ';
-			           }
-			       }
-			       $menuHtml .= '</ul>';
-			   }
-			    $menuHtml .= '</li>';
-			    $menuHtml = str_replace('#isMenuActive#', $isMenuActive, $menuHtml);
-			    echo $menuHtml;
-			}
+			// foreach($system_menus as $menu){
+			//     $funcList = $menu['funcList'];
+			//     $isMenuActive = '';
+			//     $isTreeView = count($funcList) > 0 ? "treeview" : "";
+			//     $menuHtml = '<li class="#isMenuActive#'. $isTreeView .'">'; // active 
+			//     $menuHtml .= '   <a href="#">';
+			//     $menuHtml .= '   <i class="fa fa-table"></i> <span>'. $menu['label'] .'</span>';
+			//     $menuHtml .= '   <span class="pull-right-container">';
+			//     $menuHtml .= '       <i class="fa fa-angle-left pull-right"></i>';
+			//     $menuHtml .= '   </span>';
+			//     $menuHtml .= '   </a>';
+			//    // echo '   <ul class="treeview-menu">';
+			//    if($isTreeView != ""){
+			//        $menuHtml .= '<ul class="treeview-menu">';
+			//        foreach($funcList as $fun){
+			//            $isActive = $fun['url'] == $funInfo['entry_url'] ? 'class="active"' : ''; //'. $isActive .'
+			//            $menuHtml .= '<li '. $isActive .'><a href="'.Url::to([$fun['url']]).'"><i class="fa fa-circle-o"></i>'. $fun['label'] .'</a></li>';
+			//            if(empty($isMenuActive) == true && $isActive != ""){
+			//                $isMenuActive = 'active ';
+			//            }
+			//        }
+			//        $menuHtml .= '</ul>';
+			//    }
+			//     $menuHtml .= '</li>';
+			//     $menuHtml = str_replace('#isMenuActive#', $isMenuActive, $menuHtml);
+			//     echo $menuHtml;
+			// }
 		?>
         <li class="active treeview">   
           <a href="#">   <i class="fa fa-table"></i> <span>常用设置</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
@@ -334,9 +334,9 @@ if($otherMenu == false){
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> <?=Yii::$app->params['appVersion']?>
+      <b>版本</b> <?=Yii::$app->params['appVersion']?>
     </div>
-    <strong>Copyright &copy; 2016-<?=date('Y')?> <a href="<?=Yii::$app->params['homePage']?>"><?=Yii::$app->params['appName']?></a>.</strong> All rights
+    <strong>版权所有 &copy; 2016-<?=date('Y')?> <a href="<?=Yii::$app->params['homePage']?>"><?=Yii::$app->params['appName']?></a>.</strong> All rights
     reserved.
   </footer>
 

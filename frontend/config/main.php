@@ -14,9 +14,11 @@ return [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '7EmI1aODEGmCo7LwyKBilJ3WKe45oMsv',
         ],
-        'user' => [
-            'identityClass' => 'common\models\User',
+        'user'=>[
+            'class'=>'yii\web\User',
+            'identityClass' => 'frontend\models\User',
             'enableAutoLogin' => true,
+            'enableSession'=>true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
