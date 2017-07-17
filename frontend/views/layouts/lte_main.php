@@ -126,21 +126,27 @@ $otherMenu = true;
 
 
 <div class="wrapper">
+<div class="wrapper-inner">
 
   <header class="main-header">
-    <!-- Logo -->
-    <a href="<?=Url::toRoute('site/index')?>" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>X</b>BT</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>X</b>BOOT管理系统</span>
-    </a>
+    <div class="banner-inner">
+      这里是一个广告图片
+    </div>
+
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
+      <ul class="nav-menu-inner">
+        <li><a href="<?=Url::to(['site/index'])?>">我的主页</a></li>
+        <li><a href="<?=Url::to(['announcement/index'])?>">本站公告</a></li>
+        <li><a href="<?=Url::to(['question/index'])?>">常见问答</a></li>
+        <li><a href="<?=Url::toRoute(['rules/view','id'=>1])?>">规则介绍</a></li>
+        <li><a href="<?=Url::to(['site/index'])?>">团队架构图</a></li>
+        <li class="last"><a href="<?=Url::toRoute('site/logout')?>" data-method="post">退出</a></li>
+      </ul>
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <!-- <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
-      </a>
+      </a> -->
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -187,36 +193,30 @@ $otherMenu = true;
         </div>
         
         <div class="pull-left info">
-          <p><?php echo Yii::$app->user->identity->uname;?></p>
-          <a href="<?=Url::toRoute('site/logout')?>"><i class="fa fa-circle text-success"></i>退出</a>
+          <p>欢迎您</p>
+          <p><?php echo Yii::$app->user->identity->full_name;?></p>
+          <!-- <a href="<?=Url::toRoute('site/logout')?>"><i class="fa fa-circle text-success"></i>退出</a> -->
         </div>
       </div>
 
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header"> </li>
 
-        <li <?=$route == 'site/index' ?  ' class="active" ' : ''?>>
-        	<a href="<?=Url::to(['site/index'])?>">
-        	<i class="fa fa-dashboard"></i> 
-        	<span>主页</span>
-        	</a>
-        </li>
 
         <li class="active treeview">   
-          <a href="#">   <i class="fa fa-table"></i> <span>常用设置</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
+          <a href="#">   <i class="fa fa-table"></i> <span>我的设置</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<?php echo Url::toRoute('announcement/index');?>"><i class="fa fa-circle-o"></i>公告列表</a></li>
-            <li class="active"><a href="<?php echo Url::toRoute('question/index');?>"><i class="fa fa-circle-o"></i>问答管理</a></li>
-            <li class="active"><a href="<?php echo Url::toRoute('rules/index');?>"><i class="fa fa-circle-o"></i>规则管理</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('announcement/index');?>"><i class="fa fa-circle-o"></i>我的资料</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('question/index');?>"><i class="fa fa-circle-o"></i>申请升级</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('rules/index');?>"><i class="fa fa-circle-o"></i>升级记录</a></li>
           </ul>
         </li>    
   
         <li class="active treeview">   
-          <a href="#">   <i class="fa fa-table"></i> <span>会员管理</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
+          <a href="#">   <i class="fa fa-table"></i> <span>我的团队</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<?php echo Url::toRoute('user/index');?>"><i class="fa fa-circle-o"></i>会员列表</a></li>
-            <li class="active"><a href="<?php echo Url::toRoute('user-level/index');?>"><i class="fa fa-circle-o"></i>申请管理</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user-level/index');?>"><i class="fa fa-circle-o"></i>注册账号</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user-level/index');?>"><i class="fa fa-circle-o"></i>我的下级</a></li>
           </ul>
         </li>    
   
@@ -228,7 +228,7 @@ $otherMenu = true;
   <!-- Content Wrapper. Contains page content -->
   
   <div class="content-wrapper">
-    <section class="content-header">
+<!--     <section class="content-header">
      
       <h1>  <small>
       
@@ -237,7 +237,7 @@ $otherMenu = true;
         <li><a href="<?=Url::toRoute('site/index')?>"><i class="fa fa-dashboard"></i> 首页</a></li>
 
       </ol>
-    </section>
+    </section> -->
     
       
    
@@ -449,6 +449,7 @@ $otherMenu = true;
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
+</div>
 </div>
 <!-- ./wrapper -->
 

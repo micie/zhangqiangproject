@@ -20,7 +20,7 @@ class QuestionController extends Base2Controller
      */
     public function actionIndex()
     {
-        $query = Question::find();
+        $query = Question::find()->orderBy('sort_order asc,id desc');
          $querys = Yii::$app->request->get('query');
         if(count($querys) > 0){
             $condition = "";
@@ -68,78 +68,18 @@ class QuestionController extends Base2Controller
     {
         //$id = Yii::$app->request->post('id');
         $model = $this->findModel($id);
-        echo json_encode($model->getAttributes());
-
-    }
-
-    /**
-     * Creates a new AdminUser model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Question();
-        if ($model->load(Yii::$app->request->post())) {
-            
-            if($model->validate() == true && $model->save()){
-                $msg = array('errno'=>0, 'msg'=>'保存成功');
-                echo json_encode($msg);
-            }
-            else{
-                $msg = array('errno'=>2, 'data'=>$model->getErrors());
-                echo json_encode($msg);
-            }
-        } else {
-            $msg = array('errno'=>2, 'msg'=>'数据出错');
-            echo json_encode($msg);
+        if($model){
+            $question = $model->question;
+            $answer = $model->answer;
+        }else{
+            $question = '数据错误';
+            $answer = '';
         }
-    }
+        return $this->render('view', [
+            'question'=>$question,
+            'answer'=>$answer,
+        ]);
 
-    /**
-     * Updates an existing AdminUser model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionUpdate()
-    {
-        $id = Yii::$app->request->post('id');
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post())) {
-       
-            if($model->validate() == true && $model->save()){
-                $msg = array('errno'=>0, 'msg'=>'保存成功');
-                echo json_encode($msg);
-            }
-            else{
-                $msg = array('errno'=>2, 'data'=>$model->getErrors());
-                echo json_encode($msg);
-            }
-        } else {
-            $msg = array('errno'=>2, 'msg'=>'数据出错');
-            echo json_encode($msg);
-        }
-    
-    }
-
-    /**
-     * Deletes an existing AdminUser model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionDelete(array $ids)
-    {
-        if(count($ids) > 0){
-            $c = Question::deleteAll(['in', 'id', $ids]);
-            echo json_encode(array('errno'=>0, 'data'=>$c, 'msg'=>json_encode($ids)));
-        }
-        else{
-            echo json_encode(array('errno'=>2, 'msg'=>''));
-        }
-    
-  
     }
 
     /**

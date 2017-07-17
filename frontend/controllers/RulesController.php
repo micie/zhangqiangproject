@@ -20,7 +20,7 @@ class RulesController extends Base2Controller
      */
     public function actionIndex()
     {
-        $query = Rules::find();
+        $query = Rules::find()->orderBy('sort_order asc,id desc');
          $querys = Yii::$app->request->get('query');
         if(count($querys) > 0){
             $condition = "";
@@ -68,78 +68,15 @@ class RulesController extends Base2Controller
     {
         //$id = Yii::$app->request->post('id');
         $model = $this->findModel($id);
-        echo json_encode($model->getAttributes());
-
-    }
-
-    /**
-     * Creates a new AdminUser model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Rules();
-        if ($model->load(Yii::$app->request->post())) {
-            
-            if($model->validate() == true && $model->save()){
-                $msg = array('errno'=>0, 'msg'=>'保存成功');
-                echo json_encode($msg);
-            }
-            else{
-                $msg = array('errno'=>2, 'data'=>$model->getErrors());
-                echo json_encode($msg);
-            }
-        } else {
-            $msg = array('errno'=>2, 'msg'=>'数据出错');
-            echo json_encode($msg);
+        if($model){
+            $content = $model->content;
+        }else{
+            $content = '数据错误';
         }
-    }
+        return $this->render('view', [
+            'content'=>$content,
+        ]);
 
-    /**
-     * Updates an existing AdminUser model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionUpdate()
-    {
-        $id = Yii::$app->request->post('id');
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post())) {
-       
-            if($model->validate() == true && $model->save()){
-                $msg = array('errno'=>0, 'msg'=>'保存成功');
-                echo json_encode($msg);
-            }
-            else{
-                $msg = array('errno'=>2, 'data'=>$model->getErrors());
-                echo json_encode($msg);
-            }
-        } else {
-            $msg = array('errno'=>2, 'msg'=>'数据出错');
-            echo json_encode($msg);
-        }
-    
-    }
-
-    /**
-     * Deletes an existing AdminUser model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionDelete(array $ids)
-    {
-        if(count($ids) > 0){
-            $c = Rules::deleteAll(['in', 'id', $ids]);
-            echo json_encode(array('errno'=>0, 'data'=>$c, 'msg'=>json_encode($ids)));
-        }
-        else{
-            echo json_encode(array('errno'=>2, 'msg'=>''));
-        }
-    
-  
     }
 
     /**

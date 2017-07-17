@@ -19,7 +19,7 @@ $modelLabel = new \backend\models\Rules();
       <div class="box">
       
         <div class="box-header">
-          <h3 class="box-title">问答管理</h3>
+          <h3 class="box-title">规则管理</h3>
           <div class="box-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
                 
@@ -34,7 +34,7 @@ $modelLabel = new \backend\models\Rules();
           <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
             <!-- row start search-->
             <div class="row">
-            <div class="col-sm-12">
+            <!-- <div class="col-sm-12">
                 <?php ActiveForm::begin(['id' => 'Rules-search-form', 'method'=>'get', 'options' => ['class' => 'form-inline'], 'action'=>Url::toRoute('Rules/index')]); ?>     
                 
                   <div class="form-group" style="margin: 5px;">
@@ -45,7 +45,7 @@ $modelLabel = new \backend\models\Rules();
                 <a onclick="searchAction()" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>搜索</a> | <button id="create_btn" type="button" class="btn btn-sm btn-primary">添加</button>
               </div>
                <?php ActiveForm::end(); ?> 
-            </div>
+            </div> -->
             </div>
             <!-- row end search -->
             
@@ -80,7 +80,7 @@ $modelLabel = new \backend\models\Rules();
                 echo '  <td class="center">';
                 echo '      <a id="view_btn" onclick="viewAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
                  echo '      <a id="edit_btn" onclick="editAction(' . $model->id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
-                echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
+                //echo '      <a id="delete_btn" onclick="deleteAction(' . $model->id . ')" class="btn btn-danger btn-sm" href="#"> <i class="glyphicon glyphicon-trash icon-white"></i>删除</a>';
                 echo '  </td>';
                 echo '<tr/>';
             }
