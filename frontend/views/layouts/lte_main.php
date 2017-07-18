@@ -136,7 +136,7 @@ $otherMenu = true;
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <ul class="nav-menu-inner">
-        <li><a href="<?=Url::to(['site/index'])?>">我的主页</a></li>
+        <li><a href="<?=Url::to(['user/info'])?>">我的主页</a></li>
         <li><a href="<?=Url::to(['announcement/index'])?>">本站公告</a></li>
         <li><a href="<?=Url::to(['question/index'])?>">常见问答</a></li>
         <li><a href="<?=Url::toRoute(['rules/view','id'=>1])?>">规则介绍</a></li>
@@ -206,7 +206,7 @@ $otherMenu = true;
         <li class="active treeview">   
           <a href="#">   <i class="fa fa-table"></i> <span>我的设置</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<?php echo Url::toRoute('announcement/index');?>"><i class="fa fa-circle-o"></i>我的资料</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user/info');?>"><i class="fa fa-circle-o"></i>我的资料</a></li>
             <li class="active"><a href="<?php echo Url::toRoute('question/index');?>"><i class="fa fa-circle-o"></i>申请升级</a></li>
             <li class="active"><a href="<?php echo Url::toRoute('rules/index');?>"><i class="fa fa-circle-o"></i>升级记录</a></li>
           </ul>

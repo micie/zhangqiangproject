@@ -78,3 +78,9 @@
     border-top:solid 1px #111;
     margin:5px 0;
 }
+.table-inner{
+    border: 0;
+}
+.table-inner td{
+    padding: 10px;
+}

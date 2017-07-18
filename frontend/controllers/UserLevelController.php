@@ -1,12 +1,12 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use Yii;
 use yii\data\Pagination;
-use backend\models\User;
-use backend\models\UserLevelHis;
-use backend\models\UserTier;
+use frontend\models\User;
+use frontend\models\UserLevelHis;
+use frontend\models\UserTier;
 use yii\web\NotFoundHttpException;
 
 class UserLevelController extends Base2Controller

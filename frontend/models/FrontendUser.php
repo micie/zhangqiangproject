@@ -5,6 +5,7 @@ use Yii;
 use yii\web\IdentityInterface;
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
+use backend\services\CommonService;
 
 class frontendUser extends ActiveRecord implements IdentityInterface
 {
@@ -35,7 +36,7 @@ class frontendUser extends ActiveRecord implements IdentityInterface
         if (self::validatePassword($user, $password) == true) {
             if (Yii::$app->user->login($user, $rememberMe ? 3600 * 24 * 30 : 0) == true) {
                 // $user->initUserModuleList();
-                // $user->initUserUrls();
+                $user->initUserSession($user);
                 return true;
             }
         } 
@@ -100,10 +101,22 @@ class frontendUser extends ActiveRecord implements IdentityInterface
     }
 
     public function clearUserSession(){
-        Yii::$app->session['system_menus_'.$this->id] = null;
-        Yii::$app->session['system_rights_'.$this->id] = null;
+        Yii::$app->session['user_info'] = null;
     }
-
+    public function initUserSession($user = null)
+    {
+        $info = [];
+        $info['full_name'] = $user->full_name;
+        $info['uname'] = $user->uname;
+        $info['phone'] = $user->phone;
+        $info['status'] = $user->status;
+        $info['create_date'] = $user->create_date;
+        $info['level'] = $user->level;
+        $info['status_name'] = CommonService::getStatusName($user->status);
+        $info['level_name'] = CommonService::getLevelStatusName($user->level);
+        Yii::$app->session['user_info'] = $info;
+        return true;
+    }
 }
 
 ?>
