@@ -55,6 +55,10 @@ use yii\helpers\Url;
                     <td align="right" width="20%">加入时间：</td>  
                     <td align="left"  ><?php echo $user_info['create_date']; ?></td>
                   </tr>
+                  <tr id="rowid_1">  
+                    <td align="right" width="20%">上级：</td>  
+                    <td align="left"  ><?php echo $user_info['top_full_name']; ?></td>
+                  </tr>
                   
                 </tbody>
               </table>

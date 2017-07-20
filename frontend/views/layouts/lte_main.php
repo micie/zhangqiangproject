@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = '管理后台';
+$this->title = '管理平台';
 
 $route = $this->context->route;
 $absoluteUrl = Yii::$app->request->absoluteUrl;
@@ -207,7 +207,7 @@ $otherMenu = true;
           <a href="#">   <i class="fa fa-table"></i> <span>我的设置</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
           <ul class="treeview-menu">
             <li class="active"><a href="<?php echo Url::toRoute('user/info');?>"><i class="fa fa-circle-o"></i>我的资料</a></li>
-            <li class="active"><a href="<?php echo Url::toRoute('question/index');?>"><i class="fa fa-circle-o"></i>申请升级</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user/upgrade');?>"><i class="fa fa-circle-o"></i>申请升级</a></li>
             <li class="active"><a href="<?php echo Url::toRoute('rules/index');?>"><i class="fa fa-circle-o"></i>升级记录</a></li>
           </ul>
         </li>    

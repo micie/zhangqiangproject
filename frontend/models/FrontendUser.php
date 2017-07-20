@@ -106,6 +106,7 @@ class frontendUser extends ActiveRecord implements IdentityInterface
     public function initUserSession($user = null)
     {
         $info = [];
+        $info['user_id'] = $user->id;
         $info['full_name'] = $user->full_name;
         $info['uname'] = $user->uname;
         $info['phone'] = $user->phone;

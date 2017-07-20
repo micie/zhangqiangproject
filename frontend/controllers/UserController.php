@@ -21,6 +21,14 @@ class UserController extends Base2Controller
     public function actionInfo()
     {
         $user_info = Yii::$app->session['user_info'];
+        $user_info['top_user_id'] = '';
+        $user_info['top_full_name'] = '';
+        $sql = "select  a.top_user_id,b.full_name as top_full_name  from  ".UserTier::tableName()." a left join  ".User::tableName()." b on a.top_user_id=b.id where a.user_id = :uid";
+        $query = User::findBysql($sql,[':uid'=>$user_info['user_id']])->asArray()->one();
+        if($query){
+            $user_info['top_user_id'] = $query['top_user_id'];
+            $user_info['top_full_name'] = $query['top_full_name'];
+        }
         return $this->render('info', [
             'user_info'=>$user_info,
         ]);
@@ -31,14 +39,20 @@ class UserController extends Base2Controller
      * @param string $id
      * @return mixed
      */
+    public function actionUpgrade()
+    {
+        $user_info = Yii::$app->session['user_info'];
+        return $this->render('upgrade', [
+            'user_info'=>$user_info,
+        ]);
+
+    }
+
     public function actionApplyUpgrade()
     {
-        return $this->render('index', [
-            'models'=>$models,
-            'pages'=>$pagination,
-            'query'=>$querys,
-            'top_user_id'=>$top_user_id,
-            'path_show'=>$path_show,
+        $user_info = Yii::$app->session['user_info'];
+        return $this->render('apply-upgrade', [
+            'user_info'=>$user_info,
         ]);
 
     }
