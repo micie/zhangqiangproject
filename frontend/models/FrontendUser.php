@@ -115,6 +115,14 @@ class frontendUser extends ActiveRecord implements IdentityInterface
         $info['level'] = $user->level;
         $info['status_name'] = CommonService::getStatusName($user->status);
         $info['level_name'] = CommonService::getLevelStatusName($user->level);
+        $info['top_user_id'] = '';
+        $info['top_full_name'] = '';
+        $sql = "select  a.top_user_id,b.full_name as top_full_name  from  ".UserTier::tableName()." a left join  ".User::tableName()." b on a.top_user_id=b.id where a.user_id = :uid";
+        $query = User::findBysql($sql,[':uid'=>$user->id])->asArray()->one();
+        if($query){
+            $info['top_user_id'] = $query['top_user_id'];
+            $info['top_full_name'] = $query['top_full_name'];
+        }
         Yii::$app->session['user_info'] = $info;
         return true;
     }

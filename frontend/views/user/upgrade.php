@@ -35,7 +35,14 @@ use yii\helpers\Url;
                       这里是文字说明，这里是文字说明，这里是文字说明，这里是文字说明，这里是文字说明，这里是文字说明，这里是文字说明，这里是文字说明，这里是文字说明，这里是文字说明，这里是文字说明，
                   </div>
                 <div class="form-group">
-                  <button id="create_btn" type="submit" class="btn btn-sm btn-primary">提交申请</button>
+                <?php 
+                  if(isset($msg)){
+                    echo '<br><p style="color:red;">'.$msg.'</p>';
+                  }else{
+                    echo '<button id="create_btn" type="submit" class="btn btn-sm btn-primary">提交申请</button>';
+                  }
+                ?>
+                  
                 </div>
                <?php ActiveForm::end(); ?> 
             </div>

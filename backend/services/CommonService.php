@@ -24,6 +24,8 @@ class CommonService {
         '1'=>'已通过',
         '2'=>'未通过',
     ];
+    public static $level_max = 8;
+    
     public static function getRoleName($id=0){
     	if(isset(self::$role_list[$id])){
     		return self::$role_list[$id];

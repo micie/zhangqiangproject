@@ -208,7 +208,7 @@ $otherMenu = true;
           <ul class="treeview-menu">
             <li class="active"><a href="<?php echo Url::toRoute('user/info');?>"><i class="fa fa-circle-o"></i>我的资料</a></li>
             <li class="active"><a href="<?php echo Url::toRoute('user/upgrade');?>"><i class="fa fa-circle-o"></i>申请升级</a></li>
-            <li class="active"><a href="<?php echo Url::toRoute('rules/index');?>"><i class="fa fa-circle-o"></i>升级记录</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user/upgrade-log');?>"><i class="fa fa-circle-o"></i>升级记录</a></li>
           </ul>
         </li>    
   
@@ -216,6 +216,7 @@ $otherMenu = true;
           <a href="#">   <i class="fa fa-table"></i> <span>我的团队</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
           <ul class="treeview-menu">
             <li class="active"><a href="<?php echo Url::toRoute('user-level/index');?>"><i class="fa fa-circle-o"></i>注册账号</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user/upgrade-log-sub');?>"><i class="fa fa-circle-o"></i>下级申请</a></li>
             <li class="active"><a href="<?php echo Url::toRoute('user-level/index');?>"><i class="fa fa-circle-o"></i>我的下级</a></li>
           </ul>
         </li>    
