@@ -24,7 +24,8 @@ class CommonService {
         '1'=>'已通过',
         '2'=>'未通过',
     ];
-    public static $level_max = 8;
+    public static $level_max = 8; // 最大层级
+    public static $sub_max = 3; // 直属下级最大数量
     
     public static function getRoleName($id=0){
     	if(isset(self::$role_list[$id])){
@@ -51,7 +52,7 @@ class CommonService {
         return '无';
     }
     public static function getUserPath($id=0){
-        $sql = "select a.id,a.uname,a.phone,a.full_name,b.role,b.top_user_id from ".User::tableName()." a left join  ".UserTier::tableName()." b on a.id=b.user_id  where b.user_id=:id  ";
+        $sql = "select a.id,a.uname,a.phone,a.full_name,b.role,b.top_user_id from ".User::tableName()." a left join  ".UserTier::tableName()." b on a.id=b.user_id  where a.status=0 and b.user_id=:id  ";
         $query = User::findBysql($sql,[':id'=>$id])->asArray()->one();
         if($query['top_user_id'] == 0){
             $rtn = [
@@ -80,7 +81,36 @@ class CommonService {
         asort($rtn);
         return $rtn;
     }
+    public static function getUserSub($id=0,$deep=0){
+        $sql = "select a.id,a.uname,a.phone,a.full_name,b.role from ".User::tableName()." a left join  ".UserTier::tableName()." b on a.id=b.user_id  where a.status=0 and b.top_user_id=:id  ";
+        $query = User::findBysql($sql,[':id'=>$id])->asArray()->all();
+        foreach ($query as $key => $value) {
+            // 是否只取下属下级
+            if($deep == 0){
+                $sub = self::getUserSub($value['id']);
+                if($sub){
+                    $query[$key]['sub_info'] = $sub;
+                }                
+            }
+        }
+        return $query;
 
+    }
+    public static function getNewRoleForUser($arr=[]){
+        // 从小到大自动生成 123，所以看数量就知道应该是1还是2还是3
+        $c = count($arr);
+        if($c == 0){
+            $n = 1;
+        }elseif($c == 1){
+            $n = 2;
+        }elseif($c == 2){
+            $n = 3;
+        }else{
+            $n = false;
+        }
+        return $n;
+
+    }
 
 
 }

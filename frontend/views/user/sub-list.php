@@ -33,26 +33,28 @@ use backend\services\CommonService;
             	<table id="data_table" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="data_table_info">
                 <thead>
                   <tr role="row">           
-                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >申请时间</th>
-                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >旧等级</th>
-                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >新等级</th>
-                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >审核结果</th>
-                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >审核人</th>
-                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >审核时间</th>
+                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >姓名</th>
+                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >等级</th>
+                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >位置</th>
+                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >用户名</th>
+                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >手机号</th>
+                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >加入时间</th>
+                    <th tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" >下级</th>
                   </tr>
                 </thead>
                 <tbody>
                 
                 <?php
                   $row = 0;
-                  foreach ($his as $v) {
+                  foreach ($list as $v) {
                       echo '<tr id="rowid_' . $v['id'] . '">';
-                      echo '  <td align="left" width="20%">' . $v['add_time'] . '</td>';
-                      echo '  <td align="left" >' . $v['old_level'] . '</td>';
-                      echo '  <td align="left" >' . $v['new_level'] . '</td>';
-                      echo '  <td align="left" width="15%">' . CommonService::getLevelStatusName($v['status']) . '</td>';
-                      echo '  <td align="left" width="15%">' . $v['top_full_name'] . '</td>';
-                      echo '  <td align="left"  >' . (($v['approval_time'] > '2017-01-01')?$v['approval_time'] :'无'). '</td>';
+                      echo '  <td align="left" width="10%">' . $v['full_name'] . '</td>';
+                      echo '  <td align="left" >' . $v['level'] . '</td>';
+                      echo '  <td align="left" width="15%">' . CommonService::getRoleName($v['role']) . '</td>';
+                      echo '  <td align="left" width="15%">' . $v['uname'] . '</td>';
+                      echo '  <td align="left" width="15%">' . $v['phone'] . '</td>';
+                      echo '  <td align="left" width="20%">' . $v['create_date'] . '</td>';
+                      echo ' <td align="left" width="10%"><a href="'.Url::toRoute(['user/sub-list','top_user_id'=>$v['id']]).'">下级</a></td>';
                       echo '</tr>';
                   }
                 

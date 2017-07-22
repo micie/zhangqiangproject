@@ -84,3 +84,12 @@
 .table-inner td{
     padding: 10px;
 }
+.main-footer{
+    border: 0;
+}
+.skin-blue-light .content-wrapper, .skin-blue-light .main-footer{
+    border-left: 0;
+}
+.content-wrapper{
+    background: none;
+}
