@@ -38,10 +38,10 @@ class User extends FrontendUser
     public function rules()
     {
         return [
-            [['uname', 'password', 'create_user', 'create_date'], 'required'],
+            [['uname', 'password',  'create_date'], 'required'],
             [['status'], 'integer'],
             [['create_date', 'update_date', 'update_user'], 'safe'],
-            [['uname', 'domain_account', 'create_user'], 'string', 'max' => 100],
+            [['uname', 'domain_account'], 'string', 'max' => 100],
             [['password'], 'string', 'max' => 200],
             [['auth_key', 'last_ip'], 'string', 'max' => 50]
         ];

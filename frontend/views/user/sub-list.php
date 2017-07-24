@@ -18,7 +18,7 @@ use backend\services\CommonService;
       <div class="box">
       
         <div class="box-header">
-          <h3 class="box-title">我的申请记录</h3>
+          <h3 class="box-title">我的下级人员</h3>
           <div class="hr-inner"> </div>
         </div>
         <!-- /.box-header -->

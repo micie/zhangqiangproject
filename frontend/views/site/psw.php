@@ -19,14 +19,6 @@ use yii\bootstrap\ActiveForm;
                     <!-- /.box-header -->
                     <?php ActiveForm::begin(["id" => "update-psw-form", 'options' => ['class' => 'form-horizontal']]); ?>                      
                       <div class="box-body">
-                      
-                        <div class="form-group">
-                          <label for="inputEmail3" class="col-sm-3 control-label">当前角色</label>
-        
-                          <div class="col-sm-9">
-                            <input type="text" readonly="readonly" disabled="disabled" class="form-control" id="user_role" value="<?=$user_role?>" />
-                          </div>
-                        </div>
                         
                         <div class="form-group">
                           <label for="inputPassword3" class="col-sm-3 control-label">旧密码</label>
@@ -93,6 +85,7 @@ $('#update-psw-form').bind('submit', function(e) {
     	url: "<?=Url::toRoute('site/psw-save')?>",
     	success: function(value) 
     	{
+        console.log(value);
         	if(value.errno == 0){
         		$("#msg_info").removeClass('hide');
         	}

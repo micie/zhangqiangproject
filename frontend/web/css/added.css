@@ -93,3 +93,14 @@
 .content-wrapper{
     background: none;
 }
+.skin-blue-light .sidebar-menu>li.active>a{
+    text-align: left;
+    color:#3c8dbc;
+}
+.skin-blue-light .treeview-menu>li.active>a{
+    text-align: left;
+}
+.skin-blue-light .sidebar a{
+    text-align: left;
+    color:#3c8dbc;
+}

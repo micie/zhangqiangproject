@@ -145,7 +145,7 @@ class UserController extends Base2Controller
                     $user->uname = $uname;
                     $user->full_name = $full_name;
                     $user->phone = $phone;
-                    $user->password = $password;
+                    $user->password = Yii::$app->security->generatePasswordHash($password);
                     $user->status = 0;
                     $user->create_user = $user_info['user_id'];
                     $user->create_date = date('Y-m-d H:i:s',time());;

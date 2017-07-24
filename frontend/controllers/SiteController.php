@@ -5,7 +5,6 @@ use Yii;
 use yii\web\Controller;
 use frontend\models\User;
 use frontend\models\FrontendUser;
-use frontend\models\UserRole;
 use common\utils\CommonFun;
 /**
  * Site controller
@@ -80,7 +79,11 @@ class SiteController extends Base2Controller
         Yii::$app->user->logout();
         return $this->goHome();
     }
-
+    public function actionPsw()
+    {
+         return $this->render('psw' );
+    }
+    
     public function actionPswSave()
     {
         $old_password = Yii::$app->request->post('old_password', '');

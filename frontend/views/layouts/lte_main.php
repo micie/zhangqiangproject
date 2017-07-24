@@ -142,6 +142,7 @@ $otherMenu = true;
         <li><a href="<?=Url::toRoute(['rules/view','id'=>1])?>">规则介绍</a></li>
         <li><a href="<?=Url::to(['site/index'])?>">团队架构图</a></li>
         <li class="last"><a href="<?=Url::toRoute('site/logout')?>" data-method="post">退出</a></li>
+        <li class="last"><a href="<?=Url::toRoute('site/psw')?>"  >修改密码</a></li>
       </ul>
       <!-- Sidebar toggle button-->
       <!-- <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -206,18 +207,18 @@ $otherMenu = true;
         <li class="active treeview">   
           <a href="#">   <i class="fa fa-table"></i> <span>我的设置</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<?php echo Url::toRoute('user/info');?>"><i class="fa fa-circle-o"></i>我的资料</a></li>
-            <li class="active"><a href="<?php echo Url::toRoute('user/upgrade');?>"><i class="fa fa-circle-o"></i>申请升级</a></li>
-            <li class="active"><a href="<?php echo Url::toRoute('user/upgrade-log');?>"><i class="fa fa-circle-o"></i>升级记录</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user/info');?>">我的资料</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user/upgrade');?>">申请升级</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user/upgrade-log');?>">升级记录</a></li>
           </ul>
         </li>    
   
         <li class="active treeview">   
           <a href="#">   <i class="fa fa-table"></i> <span>我的团队</span>   <span class="pull-right-container">       <i class="fa fa-angle-left pull-right"></i>   </span>   </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="<?php echo Url::toRoute('user/reg-sub');?>"><i class="fa fa-circle-o"></i>注册下级账号</a></li>
-            <li class="active"><a href="<?php echo Url::toRoute('user/upgrade-log-sub');?>"><i class="fa fa-circle-o"></i>下级申请记录</a></li>
-            <li class="active"><a href="<?php echo Url::toRoute('user/sub-list');?>"><i class="fa fa-circle-o"></i>我的下级人员</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user/reg-sub');?>"></i>注册下级账号</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user/upgrade-log-sub');?>"></i>下级申请记录</a></li>
+            <li class="active"><a href="<?php echo Url::toRoute('user/sub-list');?>">我的下级人员</a></li>
           </ul>
         </li>    
   
